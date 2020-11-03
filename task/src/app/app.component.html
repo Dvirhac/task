@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="column">
+    <form autocomplete="off" [formGroup]="tripForm"
+          (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <input id="search"
+               (click)="onTuggleDropDown()"
+               placeholder="Search"
+               formControlName="state">
+        <div *ngIf="showDropDown"  (mouseleave)="showDropDown=false" class = state-container-dropdown>
+          <div *ngFor="let s of states | searchFilter:getSearchValue(); let i = index"
+               class="states"
+               value=s
+               (click)="onStateClicked(s)">
+            {{ s }}
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="form-control">
+        <label for="start">Start date:</label>
+        <input type="date" id="start" name="trip-start"
+               [value]=currentDate
+               [min]="currentDate"
+               formControlName="startDate">
+
+      </div>
+      <div class="form-control">
+        <label for="end">End date:</label>
+        <input type="date" id="end" name="trip-start"
+               [value]=tripForm.value.startDate
+               [min]= tripForm.value.startDate
+               formControlName="endDate">
+      </div>
+
+      <div class="form-control">
+        <button type="submit"
+                [disabled]="!tripForm.valid">Add Trip!</button>
+      </div>
+    </form>
+  </div>
+  <div class="column">
+    <app-trip-list></app-trip-list>
+
+  </div>
+
+</div>
+
