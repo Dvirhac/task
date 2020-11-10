@@ -1,3 +1,11 @@
+:host{
+  display: grid;
+  padding: 50px;
+  background-color: #f1d3d3;
+  height: 100vh;
+
+}
+
 label {
   display: block;
   font: 1rem 'Fira Sans', sans-serif;
@@ -7,22 +15,15 @@ input,
 label {
   margin: .4rem 0;
 }
-.form-control{
+/*.form-control{
   position: relative;
   display: block;
   padding: 10px;
-}
-.column {
-  float: left;
-  width: 50%;
+}*/
+.form-control{
+
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 .state-container-dropdown{
   z-index: 1;
@@ -44,4 +45,20 @@ label {
 }
 #search:hover{
 
+}
+
+.form-container{
+  display: grid;
+  grid-gap: 150px;
+  grid-template-rows: repeat(2,50px);
+  grid-template-columns: repeat(2,130px);
+
+}
+.submit-button.form-control{
+
+  grid-row: 3;
+  grid-column: 1 / -1;
+}
+.table{
+  grid-column: 2;
 }
