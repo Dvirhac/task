@@ -1,4 +1,14 @@
 
+:host{
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  margin: 20px;
+}
+
+.table-container{
+  background-color: ghostwhite;
+}
 #trips {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -7,7 +17,7 @@
 
 #trips td, #trips th {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 20px;
 }
 
 #trips tr:nth-child(even){background-color: #f2f2f2;}

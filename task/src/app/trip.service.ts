@@ -8,6 +8,7 @@ import {Observable, Subject} from "rxjs";
 export class TripService{
   private url :string =  'https://restcountries.eu/rest/v2/all';
   currentTrips : Trip [] = [];
+  filteredTrips : Trip[] = [];
   tripsChanged = new Subject<Trip[]>();
   constructor(private http: HttpClient) {}
   callTrips()
@@ -33,31 +34,44 @@ export class TripService{
     this.tripsChanged.next(this.currentTrips.slice());
   }
 
-  sort(compareBy: string, trips: Trip[]) : void{
+  sort(compareBy: string) : void{
     switch (compareBy){
       case 'state':
-        trips.sort((a, b) => {
+        this.filteredTrips=this.filteredTrips.sort((a, b) => {
           return a.state > b.state? 1: -1;
         });
         break;
       case 'startDate':
-       trips.sort((a, b) => {
+        this.filteredTrips=this.filteredTrips.sort((a, b) => {
           return a.startDate > b.startDate? 1: -1;
         });
         break;
       case 'endDate':
-       trips.sort((a, b) => {
+        this.filteredTrips = this.filteredTrips.sort((a, b) => {
           return a.endDate > b.endDate? 1: -1;
         });
         break;
     }
-    this.tripsChanged.next(trips.slice());
+    this.tripsChanged.next(this.filteredTrips.slice());
   }
 
-  showByDesc(prefix: string) : Trip[] {
+  getTrips() {
+    return this.currentTrips.slice();
+  }
+
+  getFilteredStates(value: string) {
+    this.filteredTrips = this.showByDesc(value);
+    return this.tripsChanged.next(this.filteredTrips.slice());
+
+  }
+
+  private showByDesc(prefix: string) : Trip[] {
     const fillerValue = prefix.toLowerCase()
     let a = this.currentTrips.filter(value =>  value.desc.toLowerCase().includes(fillerValue))
-    console.log(a);
     return a;
+  }
+
+  resetFilteredStates() {
+    this.filteredTrips = this.currentTrips.slice();
   }
 }
