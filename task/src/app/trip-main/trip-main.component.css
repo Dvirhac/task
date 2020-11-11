@@ -1,0 +1,71 @@
+:host{
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  margin: 20px;
+}
+
+
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+label {
+  margin: .4rem 0;
+}
+
+.states{
+  padding: 10px;
+  font-family: sans-serif;
+  color: lightcoral;
+}
+.states:hover{
+  color: lightgray;
+  background-color: lightcoral;
+}
+
+.form-container{
+  display: grid;
+  grid-gap: 50px;
+  height: auto;
+  width: auto;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: ghostwhite;
+  justify-items: left;
+  align-content: center;
+
+}
+.form-control{
+  display: grid;
+  width: 100%;
+}
+
+.state{
+  width: 100%;
+}
+
+.submit-button{
+  width: 100%;
+  background-color: #a4dde0;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 15px;
+
+}
+
+.dates-container{
+  display: flex;
+}
+
+.text-area{
+  background-color: white;
+}
+.date-item{
+  background: none;
+  margin: 10px;
+}
+

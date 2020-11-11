@@ -1,0 +1,49 @@
+<div class="form">
+  <form class="form-container" [formGroup]=form (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <mat-form-field>
+        <input class="state"
+          formControlName="state"
+          type="text"
+          matInput
+          placeholder="select a country"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto = "matAutocomplete">
+          <mat-option *ngFor="let state of filterStates | async"
+                      [value]="state">
+            {{state}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    </div>
+    <div class="form-control">
+      <div class="dates-container">
+        <label for="start">Start trip:</label>
+        <input class="date-item"
+               type="date"
+               id="start"
+               formControlName="startDate">
+        <label for="end">End trip:</label>
+        <input class="date-item"
+               type="date" id="end"
+               formControlName="endDate">
+
+      </div>
+      </div>
+
+
+    <div class="form-control">
+      <mat-label>Leave a comment</mat-label>
+      <textarea class="text-area"
+        matInput
+        placeholder="Ex. It makes me feel..."
+        formControlName="desc"></textarea>
+    </div>
+
+
+    <button type="submit" class="submit-button"
+            [disabled]="!form.valid" >Add Trip!
+    </button>
+  </form>
+</div>
