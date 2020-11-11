@@ -1,0 +1,22 @@
+<div class="table-container">
+  <table id="trips">
+    <tr>
+      <th (click)="onStateClick()">State</th>
+      <th (click)="onStartDateClicked()">Start Date</th>
+      <th (click)="onEndDateClicked()">End Date</th>
+      <th>description</th>
+    </tr>
+
+    <tr *ngFor="let tripEL of trips; let index = i" >
+      <td> {{ tripEL.state }}</td>
+      <td> {{ tripEL.startDate | date:'d/M/y' }}</td>
+      <td> {{ tripEL.endDate | date:'d/M/y' }}</td>
+      <td> {{ tripEL.desc }}</td>
+    </tr>
+
+    <input  type="text" class="search-button"
+            placeholder="filter trips by description"
+            [formControl]="searchText">
+  </table>
+</div>
+

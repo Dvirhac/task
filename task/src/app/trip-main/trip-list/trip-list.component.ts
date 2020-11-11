@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Trip} from "../trip.model";
-import {TripService} from "../trip.service";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Trip} from "../../trip.model";
+import {TripService} from "../../trip.service";
+import {Subscription} from "rxjs";
 import {FormControl} from "@angular/forms";
-import {map, startWith, tap} from "rxjs/operators";
+import {ActivatedRoute, Data} from "@angular/router";
 
 @Component({
   selector: 'app-trip-list',
@@ -13,23 +13,25 @@ import {map, startWith, tap} from "rxjs/operators";
 export class TripListComponent implements OnInit, OnDestroy {
   trips : Trip[] = [];
   tripsSub : Subscription;
-  trip: Trip [] = []
   searchText: FormControl;
-  filteredTrips = new Subject<Trip[]>();
-  hasTrip: boolean;
-  constructor(private tripService: TripService) { }
+
+  constructor(private tripService: TripService , private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.searchText = new FormControl('');
+    this.route.data.subscribe(
+      (data: Data) => {
+        this.trips = data['trips'];
+        this.tripService.resetFilteredStates();
+    });
+
     this.tripsSub = this.tripService.tripsChanged.subscribe( trips => {
       this.trips = trips;
-      this.filteredTrips.next(trips);
     });
 
     this.searchText.valueChanges.subscribe(value => {
-      const trips = this.tripService.showByDesc(value);
-      this.trips = trips;
-      this.filteredTrips.next(trips);
+      this.tripService.getFilteredStates(value);
     });
   }
 
@@ -39,15 +41,15 @@ export class TripListComponent implements OnInit, OnDestroy {
   }
 
   onStateClick() {
-    this.tripService.sort('state', this.trips);
+    this.tripService.sort('state');
   }
 
   onEndDateClicked() {
-    this.tripService.sort('startDate', this.trips);
+    this.tripService.sort('startDate');
   }
 
   onStartDateClicked() {
-    this.tripService.sort('endDate', this.trips);
+    this.tripService.sort('endDate');
   }
 
 }
