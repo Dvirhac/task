@@ -1,10 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
-import {TripService} from "./trip.service";
-import {Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
-
-
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "./auth/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +7,10 @@ import {map, startWith} from "rxjs/operators";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  constructor(private authService: AuthService) {
+  }
   ngOnInit(): void {
+    this.authService.autoLogin();
   }
 
 

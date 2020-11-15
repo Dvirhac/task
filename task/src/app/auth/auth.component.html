@@ -1,0 +1,43 @@
+<form *ngIf="!isLoading" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="login-container">
+    <div *ngIf="errorMessage"
+         class="form-input error">
+      <h1>Oh oh..Something went wrong...</h1>
+      <p>{{errorMessage}}</p>
+    </div>
+    <div class="form-input">
+      <input id="email "
+             type="email"
+             (keypress)="errorMessage=null"
+             placeholder="example@example.com"
+             formControlName="email">
+    </div>
+    <div *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched"
+         class="form-alert">
+      <p >please enter valid email</p>
+    </div>
+    <div class="form-input">
+      <input id="password"
+             type="password"
+             placeholder="password"
+             (keypress)="errorMessage=null"
+             formControlName="password">
+    </div>
+    <div *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
+         class="form-alert"
+         (keypress)="errorMessage=null" >
+      <p >password must have at least 6 characters </p>
+    </div>
+
+    <div class="form-input">
+      <button [disabled]="!loginForm.valid"
+              type=submit class="login-button">
+        {{ isLoginMode ? 'Sign in!' : 'Sign Up!'}}
+      </button>
+      <button (click)="switchMode()" class="login-button">{{ isLoginMode? 'Are you new? Sign Up!' : 'Already a member? Sign in!'}}</button>
+    </div>
+  </div>
+</form>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+

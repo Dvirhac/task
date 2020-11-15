@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Trip} from "../../trip.model";
-import {TripService} from "../../trip.service";
+import {Trip} from "../trip.model";
+import {TripService} from "../trip.service";
 import {Subscription} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {ActivatedRoute, Data} from "@angular/router";
