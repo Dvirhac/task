@@ -10,10 +10,11 @@ import { TripListComponent } from './trip-main/trip-list/trip-list.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { TripMainComponent } from './trip-main/trip-main.component';
+import {AuthComponent} from "./auth/auth.component";
+import {LoadingSpinnerComponent} from "./shared/loading-spinner/loading-spinner.component";
 
 
 @NgModule({
@@ -21,10 +22,11 @@ import { TripMainComponent } from './trip-main/trip-main.component';
     AppComponent,
     SearchFilterPipe,
     TripListComponent,
-    LoginComponent,
     HeaderComponent,
     FooterComponent,
     TripMainComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { TripMainComponent } from './trip-main/trip-main.component';
     MatAutocompleteModule,
     MatInputModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

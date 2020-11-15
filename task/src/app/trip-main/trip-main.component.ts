@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import {TripService} from "../trip.service";
+import {Observable, Subject} from "rxjs";
+import {TripService} from "./trip.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 
@@ -13,9 +13,11 @@ export class TripMainComponent implements OnInit {
 
   states : string[] = [];
   filterStates : Observable<string[]>;
+  filterStates2 : Subject<string []> = new Subject<string[]>();
   stateString: string = '';
   constructor(private tripService: TripService) {}
   form : FormGroup;
+  isTouched: boolean;
 
   ngOnInit(): void {
     let now = new Date();
@@ -26,27 +28,29 @@ export class TripMainComponent implements OnInit {
       desc: new FormControl(' ')
     });
 
+    this.filterStates2.next(this.states);
+
     this.tripService.callTrips().subscribe(
       (states: string[]) => {
         this.states = states;
       }
     );
 
-    this.filterStates = this.form.get('state').valueChanges
-      .pipe(
-        startWith(''),
-        map((value: string) => {
-          console.log(value)
-          return this._filter(value);
-        })
-      );
+    this.form.get('state').valueChanges.subscribe(value => {
+      if (!value) {
+        this.filterStates2.next(this.states);
+        return;
+      }
+      const filtered = this._filter(value);
+      this.filterStates2.next(filtered);
+    })
   }
 
 
   onSubmit() {
     console.log(this.form.value)
-
     this.tripService.addTrip(this.form.value);
+    this.form.reset();
   }
 
 

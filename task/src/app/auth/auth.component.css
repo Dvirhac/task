@@ -17,7 +17,18 @@
 .form-input{
   display: block;
   padding: 20px;
-  margin: 20px;
+  margin-top: 20px;
+}
+.error{
+  background-color: #fd6e6e;
+  color: #b52727;
+  font-size: 20px;
+}
+.form-alert{
+  color: #fd6e6e;
+  display: block;
+  margin-left:20px ;
+
 }
 input{
   border:none; /* Get rid of the browser's styling */

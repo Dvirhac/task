@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {TripMainComponent} from "./trip-main/trip-main.component";
 import {TripListComponent} from "./trip-main/trip-list/trip-list.component";
-import {LoginComponent} from "./login/login.component";
-import {TripsResolverService} from "./trips-resolver.service";
+import {AuthComponent} from "./auth/auth.component";
+import {TripsResolverService} from "./trip-main/trips-resolver.service";
+import {AuthGuard} from "./auth/auth.guard";
 
 
 
 const routes: Routes = [
   {path:'', redirectTo: 'trip-main', pathMatch: 'full'},
-  {path: 'trip-main', component: TripMainComponent},
+  {path: 'trip-main', component: TripMainComponent, canActivate: [AuthGuard]},
   {path: 'trips-table', component: TripListComponent , resolve: {trips: TripsResolverService}},
-  {path: 'login', component: LoginComponent}
+  {path: 'auth', component: AuthComponent}
 ];
 
 @NgModule({

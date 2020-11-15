@@ -1,10 +1,13 @@
-<header class="header">
+
+<div class="header" xmlns="http://www.w3.org/1999/html">
   <nav class="nav">
-    <ul>
-      <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-      <li><a routerLink="/trip-main" routerLinkActive="active">Find Trips</a></li>
-      <li><a routerLink="/trips-table" routerLinkActive="active">View Trips</a></li>
+    <ul class="nav">
+      <div *ngIf="isAuth " class="nav-item"> <a routerLink="/auth" (click)="onLogOut()">Logout</a></div>
+      <div class="nav-item"> <a routerLink="/auth" *ngIf="!isAuth" routerLinkActive="active">Login</a></div>
+      <div class="nav-item"> <a routerLink="/trip-main" *ngIf="isAuth" routerLinkActive="active">Find Trips</a></div>
+      <div class="nav-item"><a routerLink="/trips-table" routerLinkActive="active">View Trips</a></div>
+
     </ul>
   </nav>
 
-</header>
+</div>
